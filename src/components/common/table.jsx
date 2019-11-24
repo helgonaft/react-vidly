@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 
-const Table = props => {
-  const { columns, sortColumn, onSort, data } = this.props;
+// object destructuring from props to function parameters
+const Table = ({ columns, sortColumn, onSort, data }) => {
   return (
     <table className="table">
       <TableHeader

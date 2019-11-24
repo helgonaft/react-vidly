@@ -59,9 +59,7 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
-  render() {
-    // variable count = length property of movies object
-    const { length: count } = this.state.movies;
+  getPageData = () => {
     const {
       pageSize,
       currentPage,
@@ -76,10 +74,18 @@ class Movies extends Component {
     // orderBy takes 3 args: items, sort by what (it can be array), sort order (can be array)
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
     const movies = paginate(sorted, currentPage, pageSize);
+    return { totalCount: filtered.length, data: movies };
+  };
 
+  render() {
+    // variable count = length property of movies object
+    const { length: count } = this.state.movies;
+    const { pageSize, currentPage, sortColumn } = this.state;
+
+    const { totalCount, data: movies } = this.getPageData();
     return (
       <React.Fragment>
-        <p>{this.handleMessage(filtered.length)}</p>
+        <p>{this.handleMessage(totalCount)}</p>
         <div className="row">
           <div className="col-2">
             <ListGroup
@@ -97,7 +103,7 @@ class Movies extends Component {
               onSort={this.handleSort}
             ></MoviesTable>
             <Pagination
-              itemsCount={filtered.length}
+              itemsCount={totalCount}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={this.handlePageChange}
