@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 
 // Input: like: boolean
 // Output: onClick

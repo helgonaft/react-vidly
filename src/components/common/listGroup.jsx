@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { getGenres } from "../../services/fakeGenreService";
+import React from "react";
 
 const ListGroup = props => {
   const { items, textProperty, valueProperty, selectedGenre } = props;
