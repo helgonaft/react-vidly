@@ -12,7 +12,15 @@ class LoginForm extends Component {
     e.preventDefault();
     // call the server
   };
-  state = {};
+
+  handleChange = e => {
+    const account = { ...this.state.account };
+    account.username = e.currentTarget.value;
+    this.setState({ account });
+  };
+  state = {
+    account: { username: "", password: "" }
+  };
   render() {
     return (
       <div>
@@ -21,6 +29,8 @@ class LoginForm extends Component {
           <div className="form-group">
             <label htmlFor="userName">Username</label>
             <input
+              value={this.state.account.username}
+              onChange={this.handleChange}
               ref={this.username}
               type="text"
               className="form-control"
