@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import Input from "./common/input";
 
 class LoginForm extends Component {
-  username = React.createRef();
+  //username = React.createRef();
 
   componentDidMount() {
-    this.username.current.focus();
+    //this.username.current.focus();
   }
 
   handleSubmit = e => {
@@ -12,32 +13,31 @@ class LoginForm extends Component {
     e.preventDefault();
     // call the server
   };
-  state = {};
+
+  handleChange = e => {
+    const account = { ...this.state.account };
+    account[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ account });
+  };
+  state = { account: { username: "", password: "" } };
   render() {
+    const { account } = this.state;
     return (
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="userName">Username</label>
-            <input
-              ref={this.username}
-              type="text"
-              className="form-control"
-              id="userName"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="userPassword">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="userPassword"
-              placeholder="Password"
-            />
-          </div>
+          <Input
+            name="username"
+            label="Username"
+            value={account.username}
+            onChange={this.handleChange}
+          />
+          <Input
+            name="password"
+            label="Password"
+            value={account.password}
+            onChange={this.handleChange}
+          />
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
