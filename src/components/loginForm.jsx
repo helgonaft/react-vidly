@@ -6,14 +6,20 @@ class LoginForm extends Component {
   state = { account: { username: "", password: "" }, errors: {} };
 
   schema = {
-    username: Joi.string().required(),
-    password: Joi.string().required()
+    username: Joi.string()
+      .required()
+      .label("Username"),
+    password: Joi.string()
+      .required()
+      .label("Password")
   };
 
   validate = () => {
+    // for showing all errors instead of showing the first found
     const options = {
       abortEarly: false
     };
+    // joi validation of the form
     const result = Joi.validate(this.state.account, this.schema, options);
     const { error } = result;
     if (!error) return null;
@@ -35,13 +41,13 @@ class LoginForm extends Component {
   };
 
   validateProperty = ({ name, value }) => {
-    if (name === "username") {
-      if (value.trim() === "") return "Username is requiered";
-    }
-
-    if (name === "password") {
-      if (value.trim() === "") return "Password is required";
-    }
+    // computed properties from es6
+    const obj = { [name]: value };
+    const schema = {
+      [name]: this.schema[name]
+    };
+    const { error } = Joi.validate(obj, schema);
+    return error ? error.details[0].message : null;
   };
 
   handleChange = ({ currentTarget: input }) => {
