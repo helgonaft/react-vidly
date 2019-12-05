@@ -9,8 +9,8 @@ const ListGroup = props => {
           <li
             className={
               selectedGenre === genre
-                ? "list-group-item active"
-                : "list-group-item"
+                ? "list-group-item active clickable"
+                : "list-group-item clickable"
             }
             key={index}
             onClick={() => props.onGenreSelect(genre)}
