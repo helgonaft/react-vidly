@@ -6,9 +6,9 @@ import Customers from './components/customers';
 import Rentals from './components/rentals';
 import NavBar from './components/common/navBar';
 import NotFound from './components/notFound';
-import MovieDetails from './components/movieDetails';
 import LoginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
+import MovieForm from './components/movieForm';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/register" component={RegisterForm}></Route>
           <Route
             path="/movies/:id"
-            render={props => <MovieDetails {...props} />}
+            render={props => <MovieForm {...props} />}
           ></Route>
           <Route path="/movies" component={Movies}></Route>
           <Route path="/customers" component={Customers}></Route>
